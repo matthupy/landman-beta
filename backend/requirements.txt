@@ -1,0 +1,9 @@
+django
+django-cors-headers
+django_crispy_forms
+django-heroku
+django-simple-history
+django-localflavor
+django-admin-list-filter-dropdown
+django-smart-selects
+djangorestframework

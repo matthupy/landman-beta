@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+Django = "*"
+django-crispy-forms = "*"
+django-heroku = "*"
+django-simple-history = "*"
+django-localflavor = "*"
+django-admin-list-filter-dropdown = "*"
+django-smart-selects = "*"
+djangorestframework = "*"
+django-cors-headers = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"
