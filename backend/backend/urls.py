@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic.base import RedirectView
 from rest_framework import routers
 from landman import views
 
@@ -51,6 +52,7 @@ router.register(r'wells', views.WellView)
 router.register(r'workinglist', views.WorkingListView)
 
 urlpatterns = [
+    path('', RedirectView.as_view(url='/api/')),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
 ]
