@@ -351,7 +351,7 @@ class Unit(models.Model):
 
 class AgreementType(models.Model):
     code = models.CharField(max_length=3, primary_key=True)
-    category = models.ForeignKey(SubjectType, on_delete=models.PROTECT)
+    category = models.ForeignKey(SubjectType, on_delete=models.PROTECT, related_name='agreement_types')
     description = models.CharField(max_length=40)
 
     def __str__(self):

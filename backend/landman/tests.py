@@ -1,3 +1,5 @@
-from django.test import TestCase
-
-# Create your tests here.
+#
+# !!!! IMPORTANT !!!!
+# DO NOT PUT TESTS INTO THIS FILE
+# TESTS MUST GO IN landman/backend/tests/ SEPARATED INTO INDIVIDUAL FILES
+#
