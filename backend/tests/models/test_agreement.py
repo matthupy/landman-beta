@@ -17,6 +17,7 @@ class AgreementTestCase(TestCase):
 
         # Agreement Status Setup
         active_agreement_status = AgreementStatus.objects.create(code='A', description='Active')
+        inactive_agreement_status = AgreementStatus.objects.create(code='IN', description='Inactive')
 
         # Land Division Setup
         test_land_division = LandDivision.objects.create(code='TST', description='Test Land Division')
@@ -58,3 +59,32 @@ class AgreementTestCase(TestCase):
         self.assertIsNotNone(agreement)
         self.assertEqual(agreement.name, 'Test Agreement')
         self.assertEqual(agreement.wells.first(), test_well)
+
+    def test_inactivate_agreement(self):
+        row_agreement_type = AgreementType.objects.get(code='ROW')
+        new_agreement_stage = AgreementStage.objects.get(code='NEW')
+        active_agreement_status = AgreementStatus.objects.get(code='A')
+        ogm_rights = Right.objects.get(code='OGM')
+        test_land_division = LandDivision.objects.get(code='TST')
+        test_well = Well.objects.first()
+        agreement = Agreement.objects.create(
+            name='Test Agreement',
+            number='TST0123456789',
+            status=active_agreement_status,
+            rights=ogm_rights,
+            type=row_agreement_type,
+            stage=new_agreement_stage,
+            landDivision=test_land_division,
+            agreementDate=datetime.now(),
+            effectiveDate=datetime.now(),
+            term=60,
+        )
+        agreement.wells.set([ test_well ])
+        self.assertIsNotNone(agreement)
+        self.assertEqual(active_agreement_status, agreement.status)
+
+        inactive_agreement_status = AgreementStatus.objects.get(code='IN')
+
+        agreement.inactivate()
+
+        self.assertEqual(inactive_agreement_status, agreement.status)
