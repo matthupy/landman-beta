@@ -64,6 +64,7 @@ class AgreementTestCase(TestCase):
         row_agreement_type = AgreementType.objects.get(code='ROW')
         new_agreement_stage = AgreementStage.objects.get(code='NEW')
         active_agreement_status = AgreementStatus.objects.get(code='A')
+        inactive_agreement_status = AgreementStatus.objects.get(code='IN')
         ogm_rights = Right.objects.get(code='OGM')
         test_land_division = LandDivision.objects.get(code='TST')
         test_well = Well.objects.first()
@@ -82,8 +83,6 @@ class AgreementTestCase(TestCase):
         agreement.wells.set([ test_well ])
         self.assertIsNotNone(agreement)
         self.assertEqual(active_agreement_status, agreement.status)
-
-        inactive_agreement_status = AgreementStatus.objects.get(code='IN')
 
         agreement.inactivate()
 
