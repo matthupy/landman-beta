@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'crispy_forms',
     'django_admin_listfilter_dropdown',
+    'django_extensions',
     'django_heroku',
     'rest_framework',
     'simple_history',

@@ -1,6 +1,7 @@
 django<=3.2
 django-cors-headers
 django_crispy_forms
+django-extensions
 django-heroku
 django-simple-history
 django-localflavor
