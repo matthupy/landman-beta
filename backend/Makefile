@@ -1,4 +1,4 @@
-.PHONY: hard_reset load_data nuke
+.PHONY: create_super_user hard_reset init load_data nuke up
 
 SETTINGS=backend.settings
 
@@ -15,6 +15,13 @@ hard_reset:
 	python3 manage.py migrate --settings=$(SETTINGS)
 	python3 manage.py createsuperuser --settings=$(SETTINGS) --noinput --username $(SUPERUSER_USERNAME) --email $(SUPERUSER_EMAIL)
 	python3 manage.py loaddata --settings=$(SETTINGS) fixtures/landman/*.json
+
+#target init - Initialize environment. Only needs to be run once.
+init:
+	python3 manage.py makemigrations --settings=$(SETTINGS)
+	python3 manage.py migrate --settings=$(SETTINGS)
+	make create_super_user
+	make load_data
 
 #target load_data - Loads all data from stored fixtures
 load_data:

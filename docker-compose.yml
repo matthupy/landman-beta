@@ -1,5 +1,16 @@
 version: "3.2"
 services:
+  db:
+    image: postgres:13.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=landman
+      - POSTGRES_PASSWORD=landman
+      - POSTGRES_DB=landman_dev
+    networks:
+      - db-net
+
   backend:
     container_name: backend
     command: bash -c "make up &&
@@ -9,14 +20,17 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
+    depends_on:
+      - db
+    env_file:
+      - ./backend/.env.dev
     networks:
       - db-net
 
   frontend:
     restart: always
     command: >
-      sh -c "npm install &&
-      npm start"
+      sh -c "npm start"
     container_name: frontend
     build:
       context: ./frontend/
@@ -32,3 +46,5 @@ services:
 networks:
   db-net:
     driver: bridge
+volumes:
+  postgres_data:
