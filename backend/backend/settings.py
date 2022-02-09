@@ -18,18 +18,21 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Determine if we're testing
+TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.environ.get("DEBUG", default=0))
-
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
-
+if (TESTING):
+    SECRET_KEY = 'django-insecure-^6a$6no4)&b3g-)ntb0a!r997$o8^50*k!8jdpzd9c(n^(c4^^'
+    DEBUG = True
+    ALLOWED_HOSTS = []
+else:
+    SECRET_KEY=os.environ.get('SECRET_KEY')
+    DEBUG=os.environ.get('DEBUG')
+    ALLOWED_HOSTS=os.environ.get('DJANGO_ALLOWED_HOSTS').split(" ")
 
 # Application definition
 
