@@ -8,4 +8,6 @@ django-localflavor
 django-admin-list-filter-dropdown
 django-smart-selects
 djangorestframework
+gunicorn
+python-dotenv
 psycopg2-binary

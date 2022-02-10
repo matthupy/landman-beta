@@ -10,6 +10,11 @@ import {
 import AgreementTypes from "./AgreementTypes";
 import "./App.css";
 
+import axios from "axios";
+
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
 export default function LandmanRouter() {
   return (
     <Router>

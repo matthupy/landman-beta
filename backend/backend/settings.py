@@ -10,6 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import dj_database_url
+import django_heroku
+import dotenv
 import os
 import sys
 
@@ -18,23 +21,25 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
+
 # Determine if we're testing or in production
 TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-if (TESTING):
-    SECRET_KEY = 'django-insecure-^6a$6no4)&b3g-)ntb0a!r997$o8^50*k!8jdpzd9c(n^(c4^^'
-    DEBUG = True
-    ALLOWED_HOSTS = []
-else:
-    SECRET_KEY=os.environ.get('SECRET_KEY')
-    DEBUG=os.environ.get('DEBUG')
-    ALLOWED_HOSTS=os.environ.get('DJANGO_ALLOWED_HOSTS').split(" ")
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'django-insecure-^6a$6no4)&b3g-)ntb0a!r997$o8^50*k!8jdpzd9c(n^(c4^^'
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+ALLOWED_HOSTS = ['localhost', 'backend', 'frontend', '127.0.0.1', '[::1]']
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -97,17 +102,8 @@ SESSION_SAVE_EVERY_REQUEST = True
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': os.environ.get('SQL_ENGINE', 'django.db.backends.sqlite3'),
-        'NAME': os.environ.get('SQL_DATABASE', BASE_DIR / 'db.sqlite3'),
-        'USER': os.environ.get('SQL_USER', 'user'),
-        'PASSWORD': os.environ.get('SQL_PASSWORD', 'password'),
-        'HOST': os.environ.get('SQL_HOST', 'localhost'),
-        'PORT': os.environ.get('SQL_PORT', '5432'),
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
-}
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 
 # Password validation
@@ -159,11 +155,14 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # USER AUTHENTICATION
 LOGIN_REDIRECT_URL = 'user/login'
 
+CORS_ORIGIN_WHITELIST = [
+     'http://localhost:3000'
+]
+
 # Activate Django-heroku
 if 'HOME' in os.environ and '/app' in os.environ['HOME']:
     import django_heroku
     django_heroku.settings(locals())
 
-CORS_ORIGIN_WHITELIST = [
-     'http://localhost:3000'
-]
+options = DATABASES['default'].get('OPTIONS', {})
+options.pop('sslmode', None)
