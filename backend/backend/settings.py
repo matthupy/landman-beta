@@ -20,8 +20,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Determine if we're testing or in production
 TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
-PRODUCTION = 'HOME' in os.environ and '/app' in os.environ['HOME']:
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
