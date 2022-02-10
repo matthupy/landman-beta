@@ -27,6 +27,11 @@ init:
 load_data:
 	python3 manage.py loaddata --settings=$(SETTINGS) fixtures/landman/*.json
 
+#target migrate - Make all new migrations and apply them to the database
+migrate:
+	python3 manage.py makemigrations --settings=$(SETTINGS)
+	python3 manage.py migrate --settings=$(SETTINGS)
+
 #target nuke - Nukes the environment without recreating anything
 nuke:
 	python3 manage.py reset_db --settings=$(SETTINGS) --noinput

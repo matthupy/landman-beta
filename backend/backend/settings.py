@@ -18,8 +18,9 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Determine if we're testing
+# Determine if we're testing or in production
 TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
+PRODUCTION = 'HOME' in os.environ and '/app' in os.environ['HOME']:
 
 
 # Quick-start development settings - unsuitable for production
@@ -100,13 +101,14 @@ SESSION_SAVE_EVERY_REQUEST = True
 
 DATABASES = {
     'default': {
-        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
-        "NAME": os.environ.get("SQL_DATABASE", BASE_DIR / "db.sqlite3"),
-        "USER": os.environ.get("SQL_USER", "user"),
-        "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
-        "HOST": os.environ.get("SQL_HOST", "localhost"),
-        "PORT": os.environ.get("SQL_PORT", "5432"),
-    }
+        'ENGINE': os.environ.get('SQL_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': os.environ.get('SQL_DATABASE', BASE_DIR / 'db.sqlite3'),
+        'USER': os.environ.get('SQL_USER', 'user'),
+        'PASSWORD': os.environ.get('SQL_PASSWORD', 'password'),
+        'HOST': os.environ.get('SQL_HOST', 'localhost'),
+        'PORT': os.environ.get('SQL_PORT', '5432'),
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
 }
 
 
