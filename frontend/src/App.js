@@ -7,8 +7,8 @@ import {
   Link,
 } from "react-router-dom";
 
-import AgreementTypes from "./AgreementTypes";
-import "./App.css";
+import AgreementTypes from "./components/AgreementTypes";
+import "./style/App.css";
 
 import axios from "axios";
 

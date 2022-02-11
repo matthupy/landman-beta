@@ -5,7 +5,7 @@ import axios from "axios";
 import { Navbar, Footer } from "./HeaderFooter";
 import { Sidebar } from "./Sidebar";
 
-import "./App.css";
+import "../style/App.css";
 
 export default function AgreementTypes() {
   class Breadcrumbs extends React.Component {

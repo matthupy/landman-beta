@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./App.css";
+import "../style/App.css";
 
 export const Navbar = class Navbar extends React.Component {
   toggleSidebar() {
