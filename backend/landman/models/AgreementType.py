@@ -1,6 +1,6 @@
 from django.db import models
 
-from .SubjectType import SubjectType
+from landman.models.SubjectType import SubjectType
 
 class AgreementType(models.Model):
     code = models.CharField(max_length=3, primary_key=True)

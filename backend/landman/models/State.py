@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from .Country import Country
-from .SurveyType import SurveyType
+from landman.models.Country import Country
+from landman.models.SurveyType import SurveyType
 
 class State(models.Model):
     country = models.ForeignKey(Country, on_delete=models.PROTECT)

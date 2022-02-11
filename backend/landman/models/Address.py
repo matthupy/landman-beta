@@ -1,6 +1,6 @@
 from django.db import models
 
-from .State import State
+from landman.models.State import State
 
 class Address(models.Model):
     attention_line1 = models.CharField(max_length=128, blank=True)

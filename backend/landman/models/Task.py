@@ -2,8 +2,8 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from simple_history.models import HistoricalRecords
 
-from .TaskStatus import TaskStatus
-from .TaskType import TaskType
+from landman.models.TaskStatus import TaskStatus
+from landman.models.TaskType import TaskType
 
 class Task(models.Model):
     name = models.CharField(max_length=254)

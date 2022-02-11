@@ -5,6 +5,7 @@ import ondemand_logo from "../style/static/ondemand-logo.png";
 import logo from "../style/static/landdox-logo.png";
 import logo_blue from "../style/static/landdox-logo-blue.png";
 import avatar from "../style/static/avatar.jpg";
+import icon from "../style/static/icon.png";
 import "../style/App.css";
 
 class Sidebar_Nav extends React.Component {
@@ -362,7 +363,7 @@ export const Sidebar = class Sidebar extends React.Component {
         >
           <img
             id="ion-ios-pulse-strong"
-            src={ondemand_logo}
+            src={icon}
             className="App-logo"
             alt="logo"
           />

@@ -1,15 +1,15 @@
 from django.db import models
 from simple_history.models import HistoricalRecords
 
-from .Country import Country
-from .County import County
-from .Landowner import Landowner
-from .ProjectProgressDate import ProjectProgressDate
-from .ProjectStage import ProjectStage
-from .ProjectStatus import ProjectStatus
-from .ProjectType import ProjectType
-from .State import State
-from .Task import Task
+from landman.models.Country import Country
+from landman.models.County import County
+from landman.models.Landowner import Landowner
+from landman.models.ProjectProgressDate import ProjectProgressDate
+from landman.models.ProjectStage import ProjectStage
+from landman.models.ProjectStatus import ProjectStatus
+from landman.models.ProjectType import ProjectType
+from landman.models.State import State
+from landman.models.Task import Task
 
 
 class Project(models.Model):

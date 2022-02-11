@@ -1,9 +1,9 @@
 from django.db import models
 from simple_history.models import HistoricalRecords
 
-from .AcreageType import AcreageType
-from .Agreement import Agreement
-from .Unit import Unit
+from landman.models.AcreageType import AcreageType
+from landman.models.Agreement import Agreement
+from landman.models.Unit import Unit
 
 class Acreage(models.Model):
     type = models.ForeignKey(AcreageType, on_delete=models.PROTECT)

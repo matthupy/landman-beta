@@ -1,7 +1,7 @@
 from django.db import models
 from simple_history.models import HistoricalRecords
 
-from .WellStatus import WellStatus
+from landman.models.WellStatus import WellStatus
 
 class Well(models.Model):
     name = models.CharField(max_length=40)

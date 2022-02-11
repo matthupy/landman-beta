@@ -2,10 +2,10 @@ from django.db import models
 from simple_history.models import HistoricalRecords
 from smart_selects.db_fields import ChainedForeignKey
 
-from .Country import Country
-from .County import County
-from .LegalSegment import LegalSegment
-from .State import State
+from landman.models.Country import Country
+from landman.models.County import County
+from landman.models.LegalSegment import LegalSegment
+from landman.models.State import State
 
 class JeffLegalHeader(LegalSegment):
     country = models.ForeignKey(Country, on_delete=models.PROTECT)

@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from .State import State
+from landman.models.State import State
 
 class County(models.Model):
     state = models.ForeignKey(State, on_delete=models.PROTECT)

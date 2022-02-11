@@ -1,8 +1,8 @@
 from django.db import models
 
-from .Address import Address
-from .BackupWithholdingType import BackupWithholdingType
-from .EntityType import EntityType
+from landman.models.Address import Address
+from landman.models.BackupWithholdingType import BackupWithholdingType
+from landman.models.EntityType import EntityType
 
 class Landowner(models.Model):
     name = models.CharField(max_length=128)

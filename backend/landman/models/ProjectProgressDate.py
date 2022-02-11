@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from .ProjectProgressDateStatus import ProjectProgressDateStatus
-from .ProjectProgressDateType import ProjectProgressDateType
+from landman.models.ProjectProgressDateStatus import ProjectProgressDateStatus
+from landman.models.ProjectProgressDateType import ProjectProgressDateType
 
 class ProjectProgressDate(models.Model):
     type = models.ForeignKey(ProjectProgressDateType, on_delete=models.PROTECT)

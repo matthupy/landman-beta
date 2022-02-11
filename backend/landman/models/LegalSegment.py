@@ -1,7 +1,7 @@
 from django.db import models
 
-from .Agreement import Agreement
-from .SurveyType import SurveyType
+from landman.models.Agreement import Agreement
+from landman.models.SurveyType import SurveyType
 
 class LegalSegment(models.Model):
     agreement = models.ForeignKey(Agreement, related_name='legal_segments', on_delete=models.PROTECT)

@@ -1,12 +1,12 @@
 from django.db import models
 from simple_history.models import HistoricalRecords
 
-from .AgreementStage import AgreementStage
-from .AgreementStatus import AgreementStatus
-from .AgreementType import AgreementType
-from .LandDivision import LandDivision
-from .Right import Right
-from .Well import Well
+from landman.models.AgreementStage import AgreementStage
+from landman.models.AgreementStatus import AgreementStatus
+from landman.models.AgreementType import AgreementType
+from landman.models.LandDivision import LandDivision
+from landman.models.Right import Right
+from landman.models.Well import Well
 
 class Agreement(models.Model):
     name = models.CharField(max_length=40)
