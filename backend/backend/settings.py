@@ -12,8 +12,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import dj_database_url
 import django_heroku
-import dotenv
+from dotenv import load_dotenv
 import os
+from os.path import join, dirname
 import sys
 
 from pathlib import Path
@@ -21,12 +22,12 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
-
 # Determine if we're testing or in production
 TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
+
+# Load the .env file
+dotenv_path = join(BASE_DIR, '.env')
+load_dotenv(dotenv_path)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -35,7 +36,7 @@ TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 SECRET_KEY = 'django-insecure-^6a$6no4)&b3g-)ntb0a!r997$o8^50*k!8jdpzd9c(n^(c4^^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', '')
 
 ALLOWED_HOSTS = ['localhost', 'backend', 'frontend', '127.0.0.1', '[::1]']
 
@@ -102,17 +103,16 @@ SESSION_SAVE_EVERY_REQUEST = True
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {}
-
-if (TESTING):
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': str(BASE_DIR / 'db.sqlite3'),
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-else:
-    DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+}
+
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
