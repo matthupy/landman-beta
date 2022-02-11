@@ -26,6 +26,10 @@ jobs:
         cd backend
         python3 -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Run Initial Checks
+      run: |
+        cd backend
+        python3 manage.py check
     - name: Run Tests
       run: |
         cd backend
