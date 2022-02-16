@@ -52,8 +52,15 @@ INSTALLED_APPS = [
     'rest_framework',
     'simple_history',
     'smart_selects',
+
     'landman',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -65,15 +72,19 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'simple_history.middleware.HistoryRequestMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'build')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -108,6 +119,21 @@ DATABASES = {
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'build/static')
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+django_heroku.settings(locals())
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -161,11 +187,3 @@ LOGIN_REDIRECT_URL = 'user/login'
 CORS_ORIGIN_WHITELIST = [
      'http://localhost:3000'
 ]
-
-# Activate Django-heroku
-if 'HOME' in os.environ and '/app' in os.environ['HOME']:
-    import django_heroku
-    django_heroku.settings(locals())
-
-options = DATABASES['default'].get('OPTIONS', {})
-options.pop('sslmode', None)
