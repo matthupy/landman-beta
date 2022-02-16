@@ -9,4 +9,6 @@ django-admin-list-filter-dropdown
 django-smart-selects
 djangorestframework
 gunicorn
+psycopg2
 psycopg2-binary
+whitenoise
