@@ -2,8 +2,8 @@
 *.pyc
 
 # Backend
-/backend/db.sqlite3
-/backend/data
+./db.sqlite3
+./data
 
 # Frontend
 /frontend/package-lock.json
